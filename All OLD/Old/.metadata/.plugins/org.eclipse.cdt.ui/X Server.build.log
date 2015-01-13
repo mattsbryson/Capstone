@@ -1,0 +1,36 @@
+18:30:59 **** Build of configuration Debug for project X Server ****
+make all 
+Building target: X Server.exe
+Invoking: Cygwin C++ Linker
+g++  -o "X Server.exe"  ./test.o   
+cygwin warning:
+  MS-DOS style path detected: C:\Users\matt\Google Drive\Code\Capstone\X Server\Debug
+  Preferred POSIX equivalent is: /cygdrive/c/Users/matt/Google Drive/Code/Capstone/X Server/Debug
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
+./test.o: In function `main':
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:38: undefined reference to `xcb_connect'
+makefile:44: recipe for target 'X Server.exe' failed
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:38:(.text+0x7f): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `xcb_connect'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:61: undefined reference to `xcb_intern_atom'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:61:(.text+0x189): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `xcb_intern_atom'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:61: undefined reference to `xcb_intern_atom_reply'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:61:(.text+0x19d): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `xcb_intern_atom_reply'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:72: undefined reference to `xcb_intern_atom'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:72:(.text+0x285): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `xcb_intern_atom'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:77: undefined reference to `xcb_intern_atom_reply'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:77:(.text+0x2c4): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `xcb_intern_atom_reply'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:92: undefined reference to `xcb_disconnect'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:92:(.text+0x3b8): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `xcb_disconnect'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:95: undefined reference to `XOpenDisplay'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:95:(.text+0x3cc): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `XOpenDisplay'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:102: undefined reference to `XInternAtom'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:102:(.text+0x43e): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `XInternAtom'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:114: undefined reference to `XCloseDisplay'
+/cygdrive/c/Users/Matt/Google Drive/Code/Capstone/X Server/Debug/../test.cpp:114:(.text+0x514): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `XCloseDisplay'
+collect2: error: ld returned 1 exit status
+make: *** [X Server.exe] Error 1
+
+18:30:59 Build Finished (took 368ms)
+

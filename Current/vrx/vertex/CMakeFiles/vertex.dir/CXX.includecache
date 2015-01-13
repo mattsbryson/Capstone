@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/matt/Downloads/vr-x-wrapper/vertex/Matrix.cpp
+string.h
+-
+math.h
+-
+Matrix.h
+/home/matt/Downloads/vr-x-wrapper/vertex/Matrix.h
+
+/home/matt/Downloads/vr-x-wrapper/vertex/Matrix.h
+Vector.h
+/home/matt/Downloads/vr-x-wrapper/vertex/Vector.h
+
+/home/matt/Downloads/vr-x-wrapper/vertex/Vector.cpp
+math.h
+-
+Vector.h
+/home/matt/Downloads/vr-x-wrapper/vertex/Vector.h
+
+/home/matt/Downloads/vr-x-wrapper/vertex/Vector.h
+

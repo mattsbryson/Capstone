@@ -1,0 +1,31 @@
+19:51:33 **** Build of configuration Debug for project BasicXlib ****
+make all 
+Building file: ../test.cpp
+Invoking: Cygwin C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"test.d" -MT"test.d" -o "test.o" "../test.cpp"
+cygwin warning:
+  MS-DOS style path detected: C:\Users\matt\Google Drive\Code\Capstone\BasicXlib\Debug
+  Preferred POSIX equivalent is: /cygdrive/c/Users/matt/Google Drive/Code/Capstone/BasicXlib/Debug
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
+Finished building: ../test.cpp
+ 
+Building target: BasicXlib.exe
+Invoking: Cygwin C++ Linker
+g++  -o "BasicXlib.exe"  ./test.o   
+./test.o: In function `main':
+/cygdrive/c/Users/matt/Google Drive/Code/Capstone/BasicXlib/Debug/../test.cpp:20: undefined reference to `XOpenDisplay'
+/cygdrive/c/Users/matt/Google Drive/Code/Capstone/BasicXlib/Debug/../test.cpp:20:(.text+0x13): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `XOpenDisplay'
+/cygdrive/c/Users/matt/Google Drive/Code/Capstone/BasicXlib/Debug/../test.cpp:25: undefined reference to `XCreateWindow'
+/cygdrive/c/Users/matt/Google Drive/Code/Capstone/BasicXlib/Debug/../test.cpp:25:(.text+0xba): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `XCreateWindow'
+makefile:44: recipe for target 'BasicXlib.exe' failed
+/cygdrive/c/Users/matt/Google Drive/Code/Capstone/BasicXlib/Debug/../test.cpp:26: undefined reference to `XMapWindow'
+/cygdrive/c/Users/matt/Google Drive/Code/Capstone/BasicXlib/Debug/../test.cpp:26:(.text+0xce): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `XMapWindow'
+/cygdrive/c/Users/matt/Google Drive/Code/Capstone/BasicXlib/Debug/../test.cpp:27: undefined reference to `XFlush'
+/cygdrive/c/Users/matt/Google Drive/Code/Capstone/BasicXlib/Debug/../test.cpp:27:(.text+0xda): relocation truncated to fit: R_X86_64_PC32 against undefined symbol `XFlush'
+collect2: error: ld returned 1 exit status
+make: *** [BasicXlib.exe] Error 1
+
+19:51:34 Build Finished (took 416ms)
+

@@ -1,0 +1,10 @@
+backend cpp/h 	- handles X Server Stuff
+
+bridge.cpp/h 	- handles openGL camera & some drawing
+
+common.h 	- declarations 
+
+
+debug 		- handles error reporting 
+frontend 	- initilizes x server, applications, general startup, update mouse
+panels 		- creates panels, aka windows in opengl inside the nested x server

@@ -1,0 +1,98 @@
+
+
+
+~== BUILD ==~
+
+You will need libx11, xtest, xdamage, and gl development library:
+sudo apt-get install libx11-dev libxtst-dev libxdamage-dev libgl1-mesa-dev
+
+(If I missed something let me know)
+
+
+1) create a build directory (preferrably a neighboring directory to the source) and go into it:
+
+mkdir vrx-build
+cd vrx-build
+
+2) In the build directory use cmake:
+
+   $ cmake ../vr-x-wrapper
+
+That will use the default settings to interactively change settings (like the sixense SDK directory):
+
+   $ cmake -i ../vr-x-wrapper
+
+or for a fancier interface (you need to have ccmake installed):
+
+   $ ccmake ../vr-x-wrapper
+
+...remember to press 'c' to configure to be able to see all the settings.
+
+3) Run make will build the project, by default the install directory is a release directory in your
+build directory, so running make install is safe.
+
+   $ make install
+
+If you want to see the gcc commands when building then enter this before running make:
+   $ export VERBOSE=1
+
+
+
+~== RUNNING ==~
+
+We need a backend xserver to do the actual xserver work. I recommend Xephyr. To install it:
+   $ sudo apt-get install xserver-xephyr
+
+First you want to start Xephyr, open up a terminal and type:
+   $ Xephyr :9 -screen 1920x1080
+
+This will create a nested xserver (xserver in your current xserver) using display 9.
+
+Next we want to start our 3d xserver wrapper, open a new tab in your terminal or open a new
+terminal and type:
+   $ vrx
+
+The default display it attaches to is 9, but you can change it to 8 for example by adding the
+command line argument with `-display :8`.
+
+Now we want to try running different programs, open a new tab in your terminal or open a new
+terminal and type for example:
+   $ export DISPLAY=:9
+   $ google-chrome &
+   $ gnome-terminal &
+
+This will launch chrome and a terminal (if you are in gnome) in your xserver. From the terminal you
+can launch other programs.
+
+The export command sets the default display to 9, any programs you start from this terminal will
+now start in your new xserver.
+The `&` after a program name will let you start other programs from the same terminal instead of
+blocking the terminal.
+
+You will want to use a window manager to move and resize windows, for this example you can try
+using xfwm4 which you can install with:
+   $ apt-get install xfwm4
+
+Once that is installed, run this in your `DISPLAY=:9` terminal:
+   $ xfwm4 &
+
+Now you can move and resize windows.
+
+Hotkeys:
+
+ctrl+shift will toggle if the mouse is in the 3d window or in your desktop.
+alt+enter toggles full screen.
+superkey+escape (or windowskey+escape) will exit the 3d program.
+
+
+If you want to try using opengl programs, you need to use them indirect or they will crash. So type
+this before running your OpenGL program:
+   $ export LIBGL_ALWAYS_INDIRECT=1
+
+Now you can run blender for example.
+
+For VLC You need to go to preferences and set "Video" "Output" to X11 video output, and make sure
+overlay is disabled.
+
+
+

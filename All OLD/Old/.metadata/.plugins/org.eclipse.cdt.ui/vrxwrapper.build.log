@@ -1,0 +1,30 @@
+20:18:36 **** Incremental Build of configuration Release for project VRXWrapper ****
+make all 
+Building file: ../vertex/Matrix.cpp
+Invoking: Cygwin C++ Compiler
+g++ -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"vertex/Matrix.d" -MT"vertex/Matrix.d" -o "vertex/Matrix.o" "../vertex/Matrix.cpp"
+cygwin warning:
+  MS-DOS style path detected: C:\Users\matt\Google Drive\Code\Capstone\VRXWrapper\Release
+  Preferred POSIX equivalent is: /cygdrive/c/Users/matt/Google Drive/Code/Capstone/VRXWrapper/Release
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
+Finished building: ../vertex/Matrix.cpp
+ 
+Building file: ../vertex/Vector.cpp
+Invoking: Cygwin C++ Compiler
+g++ -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"vertex/Vector.d" -MT"vertex/Vector.d" -o "vertex/Vector.o" "../vertex/Vector.cpp"
+Finished building: ../vertex/Vector.cpp
+ 
+Building file: ../openni/openni.cpp
+Invoking: Cygwin C++ Compiler
+g++ -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"openni/openni.d" -MT"openni/openni.d" -o "openni/openni.o" "../openni/openni.cpp"
+../openni/openni.cpp:5:22: fatal error: XnOpenNI.h: No such file or directory
+ #include <XnOpenNI.h>
+                      ^
+compilation terminated.
+make: *** [openni/openni.o] Error 1
+openni/subdir.mk:18: recipe for target 'openni/openni.o' failed
+
+20:18:37 Build Finished (took 520ms)
+

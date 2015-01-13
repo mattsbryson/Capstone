@@ -1,0 +1,192 @@
+19:51:34 **** Build of configuration Debug for project Oculus Test ****
+make all 
+Building file: ../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp
+Invoking: Cygwin C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"LibOVR/Src/Kernel/OVR_ThreadsWinAPI.d" -MT"LibOVR/Src/Kernel/OVR_ThreadsWinAPI.d" -o "LibOVR/Src/Kernel/OVR_ThreadsWinAPI.o" "../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp"
+cygwin warning:
+  MS-DOS style path detected: C:\Users\matt\Google Drive\Code\Capstone\Oculus Test\Debug
+  Preferred POSIX equivalent is: /cygdrive/c/Users/matt/Google Drive/Code/Capstone/Oculus Test/Debug
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:46:5: error: 'HANDLE' does not name a type
+     HANDLE            hMutexOrSemaphore;
+     ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In constructor 'OVR::MutexImpl::MutexImpl(bool)':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:70:5: error: 'hMutexOrSemaphore' was not declared in this scope
+     hMutexOrSemaphore           = Recursive ? CreateMutex(NULL, 0, NULL) : CreateSemaphore(NULL, 1, 1, NULL);
+     ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:70:72: error: 'CreateMutex' was not declared in this scope
+     hMutexOrSemaphore           = Recursive ? CreateMutex(NULL, 0, NULL) : CreateSemaphore(NULL, 1, 1, NULL);
+                                                                        ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:70:108: error: 'CreateSemaphore' was not declared in this scope
+     hMutexOrSemaphore           = Recursive ? CreateMutex(NULL, 0, NULL) : CreateSemaphore(NULL, 1, 1, NULL);
+                                                                                                            ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In destructor 'OVR::MutexImpl::~MutexImpl()':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:74:17: error: 'hMutexOrSemaphore' was not declared in this scope
+     CloseHandle(hMutexOrSemaphore);
+                 ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:74:34: error: 'CloseHandle' was not declared in this scope
+     CloseHandle(hMutexOrSemaphore);
+                                  ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In member function 'void OVR::MutexImpl::DoLock()':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:81:9: error: '::WaitForSingleObject' has not been declared
+     if (::WaitForSingleObject(hMutexOrSemaphore, INFINITE) != WAIT_OBJECT_0)
+         ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:81:31: error: 'hMutexOrSemaphore' was not declared in this scope
+     if (::WaitForSingleObject(hMutexOrSemaphore, INFINITE) != WAIT_OBJECT_0)
+                               ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:81:50: error: 'INFINITE' was not declared in this scope
+     if (::WaitForSingleObject(hMutexOrSemaphore, INFINITE) != WAIT_OBJECT_0)
+                                                  ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:81:63: error: 'WAIT_OBJECT_0' was not declared in this scope
+     if (::WaitForSingleObject(hMutexOrSemaphore, INFINITE) != WAIT_OBJECT_0)
+                                                               ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In member function 'bool OVR::MutexImpl::TryLock()':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:88:5: error: 'DWORD' was not declared in this scope
+     DWORD ret;
+     ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:88:11: error: expected ';' before 'ret'
+     DWORD ret;
+           ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:89:10: error: 'ret' was not declared in this scope
+     if ((ret=::WaitForSingleObject(hMutexOrSemaphore, 0)) != WAIT_OBJECT_0)
+          ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:89:14: error: '::WaitForSingleObject' has not been declared
+     if ((ret=::WaitForSingleObject(hMutexOrSemaphore, 0)) != WAIT_OBJECT_0)
+              ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:89:36: error: 'hMutexOrSemaphore' was not declared in this scope
+     if ((ret=::WaitForSingleObject(hMutexOrSemaphore, 0)) != WAIT_OBJECT_0)
+                                    ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:89:62: error: 'WAIT_OBJECT_0' was not declared in this scope
+     if ((ret=::WaitForSingleObject(hMutexOrSemaphore, 0)) != WAIT_OBJECT_0)
+                                                              ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In member function 'void OVR::MutexImpl::Unlock(OVR::Mutex*)':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:104:35: error: 'hMutexOrSemaphore' was not declared in this scope
+     if ((Recursive ? ReleaseMutex(hMutexOrSemaphore) :
+                                   ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:104:52: error: 'ReleaseMutex' was not declared in this scope
+     if ((Recursive ? ReleaseMutex(hMutexOrSemaphore) :
+                                                    ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:105:65: error: 'ReleaseSemaphore' was not declared in this scope
+                      ReleaseSemaphore(hMutexOrSemaphore, 1, NULL))  != 0)
+                                                                 ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: At global scope:
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:210:9: error: 'HANDLE' does not name a type
+         HANDLE          hEvent;
+         ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In destructor 'OVR::WaitConditionImpl::~WaitConditionImpl()':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:268:9: error: '::CloseHandle' has not been declared
+         ::CloseHandle(pentry->hEvent);
+         ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:268:31: error: 'struct OVR::WaitConditionImpl::EventPoolEntry' has no member named 'hEvent'
+         ::CloseHandle(pentry->hEvent);
+                               ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In member function 'OVR::WaitConditionImpl::EventPoolEntry* OVR::WaitConditionImpl::GetNewEvent()':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:298:17: error: 'struct OVR::WaitConditionImpl::EventPoolEntry' has no member named 'hEvent'
+         pentry->hEvent  = ::CreateEvent(NULL, TRUE, 0, NULL);
+                 ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:298:27: error: '::CreateEvent' has not been declared
+         pentry->hEvent  = ::CreateEvent(NULL, TRUE, 0, NULL);
+                           ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:298:47: error: 'TRUE' was not declared in this scope
+         pentry->hEvent  = ::CreateEvent(NULL, TRUE, 0, NULL);
+                                               ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In member function 'void OVR::WaitConditionImpl::ReleaseEvent(OVR::WaitConditionImpl::EventPoolEntry*)':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:307:5: error: '::ResetEvent' has not been declared
+     ::ResetEvent(pevent->hEvent);
+     ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:307:26: error: 'struct OVR::WaitConditionImpl::EventPoolEntry' has no member named 'hEvent'
+     ::ResetEvent(pevent->hEvent);
+                          ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In member function 'bool OVR::WaitConditionImpl::Wait(OVR::Mutex*, unsigned int)':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:412:13: error: '::ReleaseMutex' has not been declared
+             ::ReleaseMutex(pmutex->pImpl->hMutexOrSemaphore);
+             ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:412:43: error: 'class OVR::MutexImpl' has no member named 'hMutexOrSemaphore'
+             ::ReleaseMutex(pmutex->pImpl->hMutexOrSemaphore);
+                                           ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:417:9: error: '::ReleaseSemaphore' has not been declared
+         ::ReleaseSemaphore(pmutex->pImpl->hMutexOrSemaphore, 1, NULL);
+         ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:417:43: error: 'class OVR::MutexImpl' has no member named 'hMutexOrSemaphore'
+         ::ReleaseSemaphore(pmutex->pImpl->hMutexOrSemaphore, 1, NULL);
+                                           ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:425:5: error: 'DWORD' was not declared in this scope
+     DWORD waitResult = ::WaitForSingleObject(pentry->hEvent,
+     ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:425:11: error: expected ';' before 'waitResult'
+     DWORD waitResult = ::WaitForSingleObject(pentry->hEvent,
+           ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:437:12: error: 'waitResult' was not declared in this scope
+     switch(waitResult)
+            ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:439:14: error: 'WAIT_ABANDONED' was not declared in this scope
+         case WAIT_ABANDONED:
+              ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:440:14: error: 'WAIT_OBJECT_0' was not declared in this scope
+         case WAIT_OBJECT_0: 
+              ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In member function 'void OVR::WaitConditionImpl::Notify()':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:479:9: error: '::SetEvent' has not been declared
+         ::SetEvent(pentry->hEvent); 
+         ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:479:28: error: 'struct OVR::WaitConditionImpl::EventPoolEntry' has no member named 'hEvent'
+         ::SetEvent(pentry->hEvent); 
+                            ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In member function 'void OVR::WaitConditionImpl::NotifyAll()':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:492:9: error: '::SetEvent' has not been declared
+         ::SetEvent(pentry->hEvent);
+         ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:492:28: error: 'struct OVR::WaitConditionImpl::EventPoolEntry' has no member named 'hEvent'
+         ::SetEvent(pentry->hEvent);
+                            ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In member function 'void OVR::Thread::Init(const OVR::Thread::CreateParams&)':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:568:5: error: 'IdValue' was not declared in this scope
+     IdValue         = 0;
+     ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In destructor 'virtual OVR::Thread::~Thread()':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:590:25: error: 'CleanupSystemThread' was not declared in this scope
+     CleanupSystemThread();
+                         ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In static member function 'static int OVR::Thread::GetOSPriority(OVR::Thread::ThreadPriority)':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:796:48: error: 'THREAD_PRIORITY_TIME_CRITICAL' was not declared in this scope
+     case Thread::CriticalPriority:      return THREAD_PRIORITY_TIME_CRITICAL;
+                                                ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:797:48: error: 'THREAD_PRIORITY_HIGHEST' was not declared in this scope
+     case Thread::HighestPriority:       return THREAD_PRIORITY_HIGHEST;
+                                                ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:798:48: error: 'THREAD_PRIORITY_ABOVE_NORMAL' was not declared in this scope
+     case Thread::AboveNormalPriority:   return THREAD_PRIORITY_ABOVE_NORMAL;
+                                                ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:799:48: error: 'THREAD_PRIORITY_NORMAL' was not declared in this scope
+     case Thread::NormalPriority:        return THREAD_PRIORITY_NORMAL;
+                                                ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:800:48: error: 'THREAD_PRIORITY_BELOW_NORMAL' was not declared in this scope
+     case Thread::BelowNormalPriority:   return THREAD_PRIORITY_BELOW_NORMAL;
+                                                ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:801:48: error: 'THREAD_PRIORITY_LOWEST' was not declared in this scope
+     case Thread::LowestPriority:        return THREAD_PRIORITY_LOWEST;
+                                                ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:802:48: error: 'THREAD_PRIORITY_IDLE' was not declared in this scope
+     case Thread::IdlePriority:          return THREAD_PRIORITY_IDLE;
+                                                ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:804:12: error: 'THREAD_PRIORITY_NORMAL' was not declared in this scope
+     return THREAD_PRIORITY_NORMAL;
+            ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: At global scope:
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:808:17: error: expected initializer before 'Thread_Win32StartFn'
+ unsigned WINAPI Thread_Win32StartFn(void * phandle)
+LibOVR/Src/Kernel/subdir.mk:69: recipe for target 'LibOVR/Src/Kernel/OVR_ThreadsWinAPI.o' failed
+                 ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:1001:1: error: expected '}' at end of input
+ } // OVR
+ ^
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp: In static member function 'static int OVR::Thread::GetOSPriority(OVR::Thread::ThreadPriority)':
+../LibOVR/Src/Kernel/OVR_ThreadsWinAPI.cpp:805:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [LibOVR/Src/Kernel/OVR_ThreadsWinAPI.o] Error 1
+
+19:51:35 Build Finished (took 569ms)
+

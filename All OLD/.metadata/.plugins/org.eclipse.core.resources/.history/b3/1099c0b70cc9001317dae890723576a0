@@ -1,0 +1,15 @@
+#include <X11/Xlib.h> // Every Xlib program must include this
+#include <assert.h>   // I include this to test return values the lazy way
+#include <unistd.h>   // So we got the profile for 10 seconds
+
+#define NIL (0)       // A name for the void pointer
+
+
+int main()
+{
+
+
+
+
+	return 0;
+}

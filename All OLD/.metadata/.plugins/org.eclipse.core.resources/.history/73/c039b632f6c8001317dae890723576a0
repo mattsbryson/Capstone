@@ -1,0 +1,223 @@
+
+#include "common.h"
+#include "backend.h"
+
+#include <X11/Xlibint.h>
+#include <X11/extensions/Xdamage.h>
+
+Backend g_backend;
+
+class GrabServer
+{
+public:
+	Display * _dpy;
+	GrabServer(Display * dpy)
+	{
+		_dpy = dpy;
+		XGrabServer(dpy);
+	}
+	~GrabServer()
+	{
+		XUngrabServer(_dpy);
+	}
+};
+
+
+
+bool BackendInitialize(const char * display_name)
+{
+	Display * dpy = XOpenDisplay(display_name);
+	if (!dpy)
+	{
+		fprintf (stderr, "%s:  unable to open display '%s'\n",
+					g_program_name, XDisplayName (display_name));
+		usage();
+		return false;
+	}
+
+	Window root = DefaultRootWindow(dpy);
+
+	int damage_error, damage;
+	if (!XDamageQueryExtension (dpy, &damage, &damage_error))
+	{
+		fprintf (stderr, "%s: Backend does not have damage extension\n", g_program_name);
+		return false;
+	}
+#ifndef USE_PANELS
+	XDamageCreate (dpy, root, XDamageReportRawRectangles);
+#endif
+
+	XWindowAttributes attrib;
+	XGetWindowAttributes(dpy, root, &attrib);
+	if (attrib.width ==0 || attrib.height == 0)
+	{
+		fprintf(stderr, "%s: Bad root with %d x %d\n", 
+			g_program_name, attrib.width, attrib.height);
+		return false;
+	}
+
+#ifndef USE_PANELS
+	GLuint texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, attrib.width, attrib.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+#endif
+
+	int buffer_size = attrib.width * attrib.height * 4;
+	unsigned char * buffer = (unsigned char *)malloc(buffer_size);
+	if (!buffer)
+	{
+		fprintf(stderr, "%s: Failed to allocate buffer %d x %d\n",g_program_name, attrib.width, attrib.height);
+		return false;
+	}
+
+	uint32_t mask = ~dpy->resource_mask;
+	uint32_t shift = 0;
+	while (!(mask & 1))
+	{
+		shift++;
+		mask >>= 1;
+	}
+
+	g_backend._dpy = dpy;
+	g_backend._root = root;
+	g_backend._damage = damage;
+	g_backend._width = attrib.width;
+	g_backend._height = attrib.height;
+#ifndef USE_PANELS
+	g_backend._texture = texture;
+#endif
+	g_backend._mouse_x = attrib.width/2;
+	g_backend._mouse_y = attrib.height/2;
+	g_backend._buffer_size = buffer_size;
+	g_backend._buffer = buffer;
+	g_backend._mask = ~dpy->resource_mask;
+	g_backend._shift = shift;
+
+#ifndef USE_PANELS
+	BackendUpdateTexture(root, texture, 0, 0, attrib.width, attrib.height);
+#endif
+	return true;
+}
+
+void BackendUpdate()
+{
+	Display * dpy = g_backend._dpy;
+	Window root = g_backend._root;
+
+#ifdef USE_PANELS
+	PanelUpdateBegin();
+
+	unsigned int nchildren;
+	Window *children, dummy;
+	int i;
+	if (!XQueryTree(dpy, root, &dummy, &dummy, &children, &nchildren))
+	{
+		PanelUpdateEnd();
+		return;
+	}
+
+	for (i = 0; i < nchildren; i++)
+	{
+		PanelUpdate(children[i]);
+	}
+
+	if (children)
+	{
+		XFree ((char *)children);
+	}
+
+	PanelUpdateEnd();
+#endif
+
+	if (XPending(dpy) > 0)
+	{
+		int damage = g_backend._damage;
+		XEvent event;
+
+		GrabServer grab(dpy);
+
+		while (XPending(dpy) > 0)
+		{
+			XNextEvent(dpy, &event);
+			switch (event.type)
+			{
+			default:
+				if (event.type == damage + XDamageNotify)
+				{
+					XDamageNotifyEvent *de = (XDamageNotifyEvent *) &event;
+					//printf ("damage %08x %d %d %d %d, %d %d %d %d\n", (int)de->drawable,
+					//		de->area.x, de->area.y, de->area.width, de->area.height,
+					//		de->geometry.x, de->geometry.y, de->geometry.width, de->geometry.height);
+#ifndef USE_PANELS
+					if (de->drawable == root)
+					{
+						BackendUpdateTexture(root, g_backend._texture, de->area.x, de->area.y, de->area.width, de->area.height);
+					}
+#else
+					PanelDamage(de->drawable, de->area.x, de->area.y, de->area.width, de->area.height);
+#endif
+				}
+			}
+		}
+	}
+}
+
+bool BackendUpdateTexture(Window w, GLuint texture, int x, int y, int width, int height)
+{
+	Display * dpy = g_backend._dpy;
+
+	// TODO: use shared memory to reduce copy operations
+	XImage *image = XGetImage (dpy, w, x, y, width, height, AllPlanes, ZPixmap);
+	if (!image)
+	{
+		printf(" unabled to get the image\n");
+		return false;
+	}
+
+	// TODO: use shader to swizzle pixels instead of doing it here
+    int bytes_per_pixel = image->bits_per_pixel / 8;
+	if (width * height * bytes_per_pixel > g_backend._buffer_size)
+	{
+		printf("failed to copy texture\n");
+		return false;
+	}
+    unsigned char * buffer = g_backend._buffer;
+    unsigned char * dst = buffer;
+    for ( int py = 0; py < height; py++)
+    {
+        unsigned char * src = ((unsigned char*)image->data) + (image->bytes_per_line * py);
+        for ( int px = 0; px < width; px++)
+        {
+            unsigned char t;
+            dst[0] = src[2];
+            dst[1] = src[1];
+            dst[2] = src[0];
+            if (bytes_per_pixel > 3)
+                dst[3] = 255;
+            src += bytes_per_pixel;
+            dst += bytes_per_pixel;
+        }
+    }
+
+	glBindTexture(GL_TEXTURE_2D, texture);
+    if (bytes_per_pixel == 4)
+    {
+        glTexSubImage2D( GL_TEXTURE_2D, 0, x, y, width, height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+    }
+    else if (bytes_per_pixel == 3)
+    {
+        glTexSubImage2D( GL_TEXTURE_2D, 0, x, y, width, height, GL_RGB, GL_UNSIGNED_BYTE, buffer);
+    }
+    else
+    {
+        printf("depth %d\n", image->depth);
+    }
+
+    XDestroyImage(image);
+
+	return true;
+}
+

@@ -1,0 +1,4 @@
+#define vrx_VERSION_MAJOR @vrx_VERSION_MAJOR@
+#define vrx_VERSION_MINOR @vrx_VERSION_MINOR@
+
+

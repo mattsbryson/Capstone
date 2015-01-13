@@ -1,0 +1,6 @@
+19:02:59 **** Incremental Build of configuration Default for project VRWrapperX ****
+make all 
+makefile:3: *** missing separator.  Stop.
+
+19:03:00 Build Finished (took 66ms)
+

@@ -1,0 +1,5 @@
+gnome-terminal --window-with-profile=autolaunch -e ./xlaunch.sh &
+sleep 2s 
+gnome-terminalGLib-GIO-CRITICAL **: g_settings_get: the format string may not contain '&' (key 'monospace-font-name' from schema 'org.gnome.desktop.interface'). This call will probably stop working with a future version of glib -e ./vrxlaunch.sh &
+sleep 2s
+gnome-terminal -e ./windowlaunch.sh &

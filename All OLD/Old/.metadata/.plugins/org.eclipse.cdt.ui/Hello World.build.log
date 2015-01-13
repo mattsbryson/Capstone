@@ -1,0 +1,38 @@
+19:51:34 **** Incremental Build of configuration Debug for project Hello World ****
+make all 
+Building file: ../src/Palindrome.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Palindrome.d" -MT"src/Palindrome.d" -o "src/Palindrome.o" "../src/Palindrome.cpp"
+cygwin warning:
+  MS-DOS style path detected: C:\Users\matt\Google Drive\Code\Capstone\Hello World\Debug
+  Preferred POSIX equivalent is: /cygdrive/c/Users/matt/Google Drive/Code/Capstone/Hello World/Debug
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
+In file included from /usr/lib/gcc/x86_64-pc-cygwin/4.8.2/include/c++/array:35:0,
+                 from ../src/Palindrome.cpp:10:
+/usr/lib/gcc/x86_64-pc-cygwin/4.8.2/include/c++/bits/c++0x_warning.h:32:2: error: #error This file requires compiler and library support for the ISO C++ 2011 standard. This support is currently experimental, and must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
+ #error This file requires compiler and library support for the \
+  ^
+../src/Palindrome.cpp: In function ‘int main()’:
+../src/Palindrome.cpp:22:2: error: ‘array’ was not declared in this scope
+  array<int,len> input;
+  ^
+../src/Palindrome.cpp:22:8: error: expected primary-expression before ‘int’
+  array<int,len> input;
+        ^
+../src/Palindrome.cpp:22:8: error: expected ‘;’ before ‘int’
+../src/Palindrome.cpp:25:3: error: ‘input’ was not declared in this scope
+   input[i]=in[i];
+   ^
+../src/Palindrome.cpp:28:21: error: ‘input’ was not declared in this scope
+  for(int i = 0; i < input.size(); i++)
+                     ^
+../src/Palindrome.cpp:30:13: error: invalid types ‘int[int]’ for array subscript
+src/subdir.mk:18: recipe for target 'src/Palindrome.o' failed
+   if(!(len[i] == len[input.size() - i]))
+             ^
+make: *** [src/Palindrome.o] Error 1
+
+19:51:34 Build Finished (took 366ms)
+

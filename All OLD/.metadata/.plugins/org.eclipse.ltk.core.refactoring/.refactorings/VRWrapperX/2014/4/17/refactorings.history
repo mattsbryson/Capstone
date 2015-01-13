@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;VRWrapperX/CMakeLists.txt&apos; to &apos;makefile&apos;" description="Rename resource &apos;CMakeLists.txt&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="CMakeLists.txt" name="makefile" stamp="1398045737681" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;VRWrapperX/vertex/CMakeLists.txt&apos; to &apos;makefile&apos;" description="Rename resource &apos;CMakeLists.txt&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="vertex/CMakeLists.txt" name="makefile" stamp="1398045744793" updateReferences="true"/>
+</session>
